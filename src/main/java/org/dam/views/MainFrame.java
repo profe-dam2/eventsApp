@@ -12,6 +12,8 @@ public class MainFrame extends JFrame implements InterfaceView {
     private JComboBox cb_generos;
     private JTable tb_consultas;
     private JComboBox cb_rol;
+    private JTextField tx_id1;
+    private JButton bt_buscar1;
 
     public MainFrame() {
         initWindow();
