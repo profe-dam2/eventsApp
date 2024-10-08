@@ -1,24 +1,57 @@
 package org.dam.controllers;
 
+import org.dam.dao.ArtistaDAO;
+import org.dam.dao.EventosDAO;
 import org.dam.dao.GeneroDAO;
 import org.dam.dao.UsuariosDAO;
 import org.dam.views.MainFrame;
 
+import javax.swing.*;
 import java.awt.event.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MainFrameController implements ActionListener,
         WindowListener, ItemListener {
 
+    public static final String GET_ARTITS_EVENTS = "GET_ARTITS_EVENTS";
+    public static final String GET_USER_EVENTS = "GET_USER_EVENTS";
+
     private final MainFrame mainFrame;
     private final GeneroDAO generoDAO;
     private final UsuariosDAO usuariosDAO;
-    public MainFrameController(MainFrame mainFrame, GeneroDAO generoDAO, UsuariosDAO usuariosDAO) {
+    private final ArtistaDAO artistaDAO;
+    private final EventosDAO eventosDAO;
+
+    public MainFrameController(MainFrame mainFrame, GeneroDAO generoDAO,
+                               UsuariosDAO usuariosDAO,
+                               ArtistaDAO artistaDAO, EventosDAO eventosDAO) {
         this.mainFrame = mainFrame;
         this.generoDAO = generoDAO;
         this.usuariosDAO = usuariosDAO;
+        this.artistaDAO = artistaDAO;
+        this.eventosDAO = eventosDAO;
     }
 
+    private void handleGetArtistEvents(){
+        try {
+            ArrayList<String[]> eventList = artistaDAO.getArtistEvents(mainFrame.getIdArtista());
+            String[] encabezado = new String[]{"ARTISTA","EVENTO","FECHA","LUGAR"};
+            mainFrame.loadTable(eventList, encabezado);
+        } catch (SQLException e) {
+            System.out.println("Error al obtener la lista de eventos de los artistas");
+        }
+    }
+
+    private void handleGetUserEvents(){
+        try {
+            ArrayList<String[]> eventList = eventosDAO.getEventsByUserID(mainFrame.getIdUser());
+            String[] encabezado = new String[]{"ID","EVENTO","DESCRIPCIÓN","FECHA"};
+            mainFrame.loadTable(eventList, encabezado);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private void handlerGetGeneros(){
         try {
@@ -43,6 +76,8 @@ public class MainFrameController implements ActionListener,
             throw new RuntimeException(e);
         }
     }
+
+
 
     private void handleLoadCbRol(){
         mainFrame.loadCbRol();
@@ -89,13 +124,30 @@ public class MainFrameController implements ActionListener,
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        String command = e.getActionCommand();
+        switch (command) {
+            case GET_ARTITS_EVENTS:
+                handleGetArtistEvents();
+                break;
+            case GET_USER_EVENTS:
+                handleGetUserEvents();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
         if(e.getStateChange() == ItemEvent.SELECTED){
-            handleGetUsuariosByRole();
+            JComboBox combo = (JComboBox) e.getSource();
+            String comboName = combo.getName();
+            if(comboName.equals("cb_rol")){
+                handleGetUsuariosByRole();
+            }else if(comboName.equals("cb_generos")){
+                // obtener los eventos de los artistas del genero indicado
+            }
+
         }
     }
 }

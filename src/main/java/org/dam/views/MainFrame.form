@@ -10,6 +10,12 @@
     <rowspec value="center:24px:noGrow"/>
     <rowspec value="top:20dlu:noGrow"/>
     <rowspec value="center:33px:noGrow"/>
+    <rowspec value="top:9dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:18dlu:noGrow"/>
+    <rowspec value="center:31px:noGrow"/>
+    <rowspec value="top:20dlu:noGrow"/>
+    <rowspec value="center:25px:noGrow"/>
     <rowspec value="top:56dlu:noGrow"/>
     <rowspec value="center:383px:grow"/>
     <rowspec value="top:29dlu:noGrow"/>
@@ -51,7 +57,7 @@
       </component>
       <scrollpane id="470a9">
         <constraints>
-          <grid row="2" column="6" row-span="9" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="6" row-span="15" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -107,6 +113,33 @@
       <component id="56182" class="javax.swing.JButton" binding="bt_buscar1">
         <constraints>
           <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="10"/>
+        </constraints>
+        <properties>
+          <text value="BUSCAR"/>
+        </properties>
+      </component>
+      <component id="92771" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="ID ARTISTA:"/>
+        </properties>
+      </component>
+      <component id="2892e" class="javax.swing.JTextField" binding="tx_idartista">
+        <constraints>
+          <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="35438" class="javax.swing.JButton" binding="bt_artistsevents">
+        <constraints>
+          <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms top="0" left="10" bottom="0" right="10"/>
         </constraints>
         <properties>

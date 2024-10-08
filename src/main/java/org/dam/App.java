@@ -3,10 +3,7 @@ package org.dam;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import org.dam.controllers.MainFrameController;
-import org.dam.dao.EventosDAO;
-import org.dam.dao.GeneroDAO;
-import org.dam.dao.RegistroDAO;
-import org.dam.dao.UsuariosDAO;
+import org.dam.dao.*;
 import org.dam.models.EventModel;
 import org.dam.views.MainFrame;
 
@@ -36,9 +33,11 @@ public class App
         UsuariosDAO usuariosDAO = new UsuariosDAO();
         EventosDAO eventosDAO = new EventosDAO();
         RegistroDAO registroDAO = new RegistroDAO();
+        ArtistaDAO artistaDAO = new ArtistaDAO();
 
         //Controladores
-        MainFrameController mainFrameController = new MainFrameController(frame, generoDAO, usuariosDAO);
+        MainFrameController mainFrameController = new MainFrameController(frame, generoDAO,
+                usuariosDAO, artistaDAO, eventosDAO);
 
         //Listeners
         frame.addListener(mainFrameController);
@@ -71,11 +70,7 @@ public class App
 //            System.out.println(e.getMessage());
 //        }
 
-        try {
-            eventosDAO.getEventsByUserID(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
 
 
         frame.showWindow();
