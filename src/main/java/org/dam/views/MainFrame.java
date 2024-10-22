@@ -7,8 +7,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
-import static org.dam.controllers.MainFrameController.GET_ARTITS_EVENTS;
-import static org.dam.controllers.MainFrameController.GET_USER_EVENTS;
+import static org.dam.controllers.MainFrameController.*;
 
 public class MainFrame extends JFrame implements InterfaceView {
     private JPanel mainPanel;
@@ -19,6 +18,8 @@ public class MainFrame extends JFrame implements InterfaceView {
     private JButton bt_buscar1;
     private JTextField tx_idartista;
     private JButton bt_artistsevents;
+    private JButton EJECUTARButton;
+    private JButton bt_update2;
 
     public MainFrame() {
         initWindow();
@@ -95,6 +96,7 @@ public class MainFrame extends JFrame implements InterfaceView {
     public void setCommands() {
         bt_artistsevents.setActionCommand(GET_ARTITS_EVENTS);
         bt_buscar1.setActionCommand(GET_USER_EVENTS);
+        bt_update2.setActionCommand(UPDATE2);
     }
 
     @Override
@@ -103,6 +105,7 @@ public class MainFrame extends JFrame implements InterfaceView {
         cb_rol.addItemListener((ItemListener) listener);
         bt_artistsevents.addActionListener(listener);
         bt_buscar1.addActionListener(listener);
+        bt_update2.addActionListener(listener);
     }
 
     @Override

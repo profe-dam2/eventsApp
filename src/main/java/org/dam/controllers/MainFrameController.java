@@ -16,7 +16,9 @@ public class MainFrameController implements ActionListener,
 
     public static final String GET_ARTITS_EVENTS = "GET_ARTITS_EVENTS";
     public static final String GET_USER_EVENTS = "GET_USER_EVENTS";
+    public static final String APARTADO3_INSERT = "APARTADO3_INSERT";
 
+    public static final String UPDATE2 = "UPDATE2";
     private final MainFrame mainFrame;
     private final GeneroDAO generoDAO;
     private final UsuariosDAO usuariosDAO;
@@ -31,6 +33,16 @@ public class MainFrameController implements ActionListener,
         this.usuariosDAO = usuariosDAO;
         this.artistaDAO = artistaDAO;
         this.eventosDAO = eventosDAO;
+    }
+
+    private void handleUpdate2(){
+        try {
+            ArrayList<String[]> listaComentarios = usuariosDAO.censurarComentarios();
+            String[] encabezado = new String[]{"COMENTARIO","FECHA","USUARIO"};
+            mainFrame.loadTable(listaComentarios, encabezado);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void handleGetArtistEvents(){
@@ -121,6 +133,9 @@ public class MainFrameController implements ActionListener,
 
     }
 
+    private void handleAparado3_Insert(){
+
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -131,6 +146,12 @@ public class MainFrameController implements ActionListener,
                 break;
             case GET_USER_EVENTS:
                 handleGetUserEvents();
+                break;
+            case APARTADO3_INSERT:
+                handleAparado3_Insert();
+                break;
+            case UPDATE2:
+                handleUpdate2();
                 break;
             default:
                 break;

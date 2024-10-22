@@ -7,6 +7,7 @@ import org.dam.dao.*;
 import org.dam.models.EventModel;
 import org.dam.views.MainFrame;
 
+import javax.swing.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -70,8 +71,17 @@ public class App
 //            System.out.println(e.getMessage());
 //        }
 
-
-
+//        try {
+//            ArrayList<String[]> lista =  usuariosDAO.cambiarEstadoUsuario(1);
+//            JOptionPane.showMessageDialog(null, lista.get(0));
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        try {
+            usuariosDAO.censurarComentarios();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         frame.showWindow();
     }

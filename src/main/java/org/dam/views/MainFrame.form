@@ -14,8 +14,12 @@
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="top:18dlu:noGrow"/>
     <rowspec value="center:31px:noGrow"/>
-    <rowspec value="top:20dlu:noGrow"/>
+    <rowspec value="top:24dlu:noGrow"/>
     <rowspec value="center:25px:noGrow"/>
+    <rowspec value="top:20dlu:noGrow"/>
+    <rowspec value="center:28px:noGrow"/>
+    <rowspec value="top:14dlu:noGrow"/>
+    <rowspec value="center:21px:noGrow"/>
     <rowspec value="top:56dlu:noGrow"/>
     <rowspec value="center:383px:grow"/>
     <rowspec value="top:29dlu:noGrow"/>
@@ -57,7 +61,7 @@
       </component>
       <scrollpane id="470a9">
         <constraints>
-          <grid row="2" column="6" row-span="15" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="6" row-span="19" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -144,6 +148,33 @@
         </constraints>
         <properties>
           <text value="BUSCAR"/>
+        </properties>
+      </component>
+      <component id="225e" class="javax.swing.JButton" binding="EJECUTARButton" default-binding="true">
+        <constraints>
+          <grid row="15" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="10" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="EJECUTAR"/>
+        </properties>
+      </component>
+      <component id="3fae3" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="APARTADO 3"/>
+        </properties>
+      </component>
+      <component id="39bfd" class="javax.swing.JButton" binding="bt_update2">
+        <constraints>
+          <grid row="16" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="10"/>
+        </constraints>
+        <properties>
+          <text value="UPDATE 2"/>
         </properties>
       </component>
     </children>
