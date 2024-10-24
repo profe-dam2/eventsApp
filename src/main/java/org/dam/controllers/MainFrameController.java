@@ -18,7 +18,14 @@ public class MainFrameController implements ActionListener,
     public static final String GET_USER_EVENTS = "GET_USER_EVENTS";
     public static final String APARTADO3_INSERT = "APARTADO3_INSERT";
 
+
     public static final String UPDATE2 = "UPDATE2";
+    public static final String UPDATE3_1 = "UPDATE3_1";
+    public static final String UPDATE3_2 = "UPDATE3_2";
+    public static final String UPDATE4 = "UPDATE4";
+
+    public static final String UPDATE4_E = "UPDATE4_E";
+
     private final MainFrame mainFrame;
     private final GeneroDAO generoDAO;
     private final UsuariosDAO usuariosDAO;
@@ -40,6 +47,46 @@ public class MainFrameController implements ActionListener,
             ArrayList<String[]> listaComentarios = usuariosDAO.censurarComentarios();
             String[] encabezado = new String[]{"COMENTARIO","FECHA","USUARIO"};
             mainFrame.loadTable(listaComentarios, encabezado);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void handleUpdate3_1(){
+        try {
+            ArrayList<String[]> listaUsuarios = usuariosDAO.establecerPremioMalComentario();
+            String[] encabezado = new String[]{"ID USUARIO","NOMBRE USUARIO","EMAIL", "ACTIVO", "PREMIOS"};
+            mainFrame.loadTable(listaUsuarios, encabezado);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void handleUpdate3_2(){
+        try {
+            ArrayList<String[]> listaUsuarios = usuariosDAO.establecerPremioBuenComentario();
+            String[] encabezado = new String[]{"ID USUARIO","NOMBRE USUARIO","EMAIL", "ACTIVO", "PREMIOS"};
+            mainFrame.loadTable(listaUsuarios, encabezado);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void handleUpdate4(){
+        try {
+            ArrayList<String[]> listaUsuarios = usuariosDAO.deshabilitarUsuariosInactivos();
+            String[] encabezado = new String[]{"ID USUARIO","NOMBRE USUARIO","EMAIL", "ACTIVO", "PREMIOS"};
+            mainFrame.loadTable(listaUsuarios, encabezado);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void handleUpdate4_E(){
+        try {
+            ArrayList<String[]> listaUsuarios = usuariosDAO.deshabilitarYHabilitarUsuarios(mainFrame.getDate1(), mainFrame.getIgnorePremio());
+            String[] encabezado = new String[]{"ID USUARIO","NOMBRE USUARIO","EMAIL", "ACTIVO", "PREMIOS"};
+            mainFrame.loadTable(listaUsuarios, encabezado);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -133,7 +180,7 @@ public class MainFrameController implements ActionListener,
 
     }
 
-    private void handleAparado3_Insert(){
+    private void handleApartado3_Insert(){
 
     }
 
@@ -148,10 +195,22 @@ public class MainFrameController implements ActionListener,
                 handleGetUserEvents();
                 break;
             case APARTADO3_INSERT:
-                handleAparado3_Insert();
+                handleApartado3_Insert();
                 break;
             case UPDATE2:
                 handleUpdate2();
+                break;
+            case UPDATE3_1:
+                handleUpdate3_1();
+                break;
+            case UPDATE3_2:
+                handleUpdate3_2();
+                break;
+            case UPDATE4:
+                handleUpdate4();
+                break;
+            case UPDATE4_E:
+                handleUpdate4_E();
                 break;
             default:
                 break;

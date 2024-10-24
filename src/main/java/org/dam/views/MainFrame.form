@@ -16,18 +16,20 @@
     <rowspec value="center:31px:noGrow"/>
     <rowspec value="top:24dlu:noGrow"/>
     <rowspec value="center:25px:noGrow"/>
-    <rowspec value="top:20dlu:noGrow"/>
-    <rowspec value="center:28px:noGrow"/>
-    <rowspec value="top:14dlu:noGrow"/>
-    <rowspec value="center:21px:noGrow"/>
-    <rowspec value="top:56dlu:noGrow"/>
-    <rowspec value="center:383px:grow"/>
-    <rowspec value="top:29dlu:noGrow"/>
-    <rowspec value="center:17px:noGrow"/>
+    <rowspec value="top:28dlu:noGrow"/>
+    <rowspec value="center:39px:noGrow"/>
+    <rowspec value="top:22dlu:noGrow"/>
+    <rowspec value="center:39px:noGrow"/>
+    <rowspec value="top:21dlu:noGrow"/>
+    <rowspec value="center:53px:noGrow"/>
+    <rowspec value="top:17dlu:noGrow"/>
+    <rowspec value="center:31px:noGrow"/>
+    <rowspec value="top:15dlu:noGrow"/>
+    <rowspec value="center:41px:noGrow"/>
     <colspec value="fill:18px:noGrow"/>
     <colspec value="fill:124px:noGrow"/>
-    <colspec value="left:37dlu:noGrow"/>
-    <colspec value="left:81dlu:noGrow"/>
+    <colspec value="left:59dlu:noGrow"/>
+    <colspec value="left:41dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:675px:grow"/>
@@ -61,7 +63,7 @@
       </component>
       <scrollpane id="470a9">
         <constraints>
-          <grid row="2" column="6" row-span="19" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="6" row-span="22" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -175,6 +177,58 @@
         </constraints>
         <properties>
           <text value="UPDATE 2"/>
+        </properties>
+      </component>
+      <component id="acd71" class="javax.swing.JButton" binding="bt_update3_1">
+        <constraints>
+          <grid row="17" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="10"/>
+        </constraints>
+        <properties>
+          <text value="UPDATE 3_1"/>
+        </properties>
+      </component>
+      <component id="6bf00" class="javax.swing.JButton" binding="bt_update3_2">
+        <constraints>
+          <grid row="18" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="10"/>
+        </constraints>
+        <properties>
+          <text value="UPDATE 3_2"/>
+        </properties>
+      </component>
+      <component id="fb226" class="javax.swing.JButton" binding="bt_update4">
+        <constraints>
+          <grid row="19" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="10"/>
+        </constraints>
+        <properties>
+          <text value="UPDATE 4"/>
+        </properties>
+      </component>
+      <component id="dc59a" class="com.github.lgooddatepicker.components.DatePicker" binding="dp_fecha1">
+        <constraints>
+          <grid row="20" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="10" left="10" bottom="10" right="10" defaultalign-horz="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="75d41" class="javax.swing.JCheckBox" binding="ck_premio">
+        <constraints>
+          <grid row="21" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="IGNORAR PREMIOS"/>
+        </properties>
+      </component>
+      <component id="95ab2" class="javax.swing.JButton" binding="bt_update4e">
+        <constraints>
+          <grid row="22" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value="UPDATE 4_E"/>
         </properties>
       </component>
     </children>

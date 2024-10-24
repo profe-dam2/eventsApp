@@ -77,11 +77,11 @@ public class App
 //        } catch (SQLException e) {
 //            throw new RuntimeException(e);
 //        }
-        try {
-            usuariosDAO.censurarComentarios();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            usuariosDAO.censurarComentarios();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
 
         frame.showWindow();
     }

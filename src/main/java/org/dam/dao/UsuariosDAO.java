@@ -2,10 +2,8 @@ package org.dam.dao;
 
 import org.dam.database.SQLDatabaseManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class UsuariosDAO {
@@ -47,7 +45,36 @@ public class UsuariosDAO {
         return comentario;
     }
 
-    public ArrayList<String[]> establecerPremios() throws SQLException {
+    public ArrayList<String[]> establecerPremioBuenComentario() throws SQLException {
+        if(!initDBConnection()){
+            throw new SQLException("Error al conectar con la base de datos");
+        }
+
+        try{
+            String obtenerBuenosComentariosquery = "SELECT c.id_usuario, c.comentario " +
+                                                   "FROM Comentarios c " +
+                                                   "INNER JOIN Usuario u ON c.id_usuario = u.id_usuario " +
+                                                   "WHERE LOWER(c.comentario) ~ '(espectacular|espectacula|increíble|increibl|espléndido|espléndid|excelente|excelent|perfecto|perfect|único|únic|agradable|agradabl)';";
+            PreparedStatement preparedStatement = connection.prepareStatement(obtenerBuenosComentariosquery);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String establecerPremioBuenComentarioQuery = "UPDATE usuario SET premios = ? WHERE id_usuario = ?";
+                int id_usuario = resultSet.getInt("id_usuario");
+                PreparedStatement actualizarPreparedStatement = connection.prepareStatement(establecerPremioBuenComentarioQuery);
+                actualizarPreparedStatement.setString(1, "Buen usuario");
+                actualizarPreparedStatement.setInt(2, id_usuario);
+                actualizarPreparedStatement.executeUpdate();
+            }
+
+        } catch (Exception e) {
+            throw new SQLException("Error al establecer mal premio");
+        }finally{
+            closeDBConnection();
+        }
+        return getUsuarios();
+    }
+
+    public ArrayList<String[]> establecerPremioMalComentario() throws SQLException {
         if(!initDBConnection()){
             throw new SQLException("Error al conectar con la base de datos");
         }
@@ -58,12 +85,22 @@ public class UsuariosDAO {
                     "ON c.id_usuario = u.id_usuario\n" +
                     "WHERE comentario LIKE CONCAT('%','***','%');\n";
             PreparedStatement preparedStatement = connection.prepareStatement(obtenerComentarioMalos);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String establecerPremioMalComentarioQuery = "UPDATE usuario SET premios = ? WHERE id_usuario = ?";
+                int id_usuario = resultSet.getInt("id_usuario");
+                PreparedStatement actualizarPreparedStatement = connection.prepareStatement(establecerPremioMalComentarioQuery);
+                actualizarPreparedStatement.setString(1, "Mal usuario");
+                actualizarPreparedStatement.setInt(2, id_usuario);
+                actualizarPreparedStatement.executeUpdate();
+            }
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new SQLException("Error al establecer mal premio");
         }finally{
             closeDBConnection();
         }
+        return getUsuarios();
     }
 
     public ArrayList<String[]> censurarComentarios() throws SQLException {
@@ -124,7 +161,7 @@ public class UsuariosDAO {
         }
 
         try {
-            String query = "SELECT id_usuario, username, email, activo\n" +
+            String query = "SELECT id_usuario, username, email, activo, premios\n" +
                     "FROM Usuario";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -132,7 +169,8 @@ public class UsuariosDAO {
                 String[] usuario = new String[]{resultSet.getString("id_usuario"),
                         resultSet.getString("username"),
                         resultSet.getString("email"),
-                        String.valueOf(resultSet.getBoolean("activo"))};
+                        String.valueOf(resultSet.getBoolean("activo")),
+                        resultSet.getString("premios")};
                 listaUsuarios.add(usuario);
             }
 
@@ -225,6 +263,149 @@ public class UsuariosDAO {
 
         return listaUsuarios; // Retorna la lista de usuarios actualizada
     }
+
+
+    public ArrayList<String[]> obtenerBuenosComentarios() throws SQLException {
+        ArrayList<String[]> niceCommentsList = new ArrayList<>();
+
+        if (!initDBConnection()) {
+            throw new SQLException("Error al conectar con la base de datos");
+        }
+
+        try {
+            String query = "SELECT c.id_usuario, " +
+                    "u.nombre AS nombre_usuario, " +
+                    "c.fecha_comentario, " +
+                    "c.comentario, " +
+                    "e.nombre_evento " +
+                    "FROM Comentarios c " +
+                    "INNER JOIN Usuario u ON c.id_usuario = u.id_usuario " +
+                    "INNER JOIN Evento e ON c.id_evento = e.id_evento";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String comentario = resultSet.getString("comentario");
+                if (checkNiceWord(comentario)) {
+                    String[] comment = new String[]{
+                            String.valueOf(resultSet.getInt("id_usuario")),
+                            resultSet.getString("nombre_usuario"),
+                            String.valueOf(resultSet.getDate("fecha_comentario")),
+                            comentario,
+                            resultSet.getString("nombre_evento")
+                    };
+
+                    niceCommentsList.add(comment);
+                }
+            }
+
+        } catch (Exception e) {
+            throw new SQLException("Error al consultar los comentarios: " + e.getMessage());
+        } finally {
+            closeDBConnection();
+        }
+
+        return niceCommentsList;
+    }
+
+    // Método para verificar si el comentario contiene palabras bonitas
+    private boolean checkNiceWord(String comentario) {
+        String pattern = "(espectacular|espectacula|increíble|increibl|espléndido|espléndid|excelente|excelent|perfecto|perfect|único|únic|agradable|agradabl)";
+        return comentario.toLowerCase().matches(".*" + pattern + ".*");
+    }
+
+    public ArrayList<String[]> deshabilitarUsuariosInactivos() throws SQLException {
+        if (!initDBConnection()) {
+            throw new SQLException("Error al conectar con la base de datos");
+        }
+
+        // Calcular la fecha de corte (2 meses atrás)
+        LocalDate cutOffDate = LocalDate.now().minusMonths(2);
+
+        String updateQuery = "UPDATE Usuario u " +
+                             "SET activo = FALSE " +
+                             "WHERE u.activo = TRUE AND u.id_usuario NOT IN (" +
+                             "    SELECT DISTINCT c.id_usuario " +
+                             "    FROM Comentarios c " +
+                             "    WHERE c.fecha_comentario >= ? " +
+                             ") AND u.premios <> 'Buen usuario'";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+            preparedStatement.setDate(1, Date.valueOf(cutOffDate)); // Establecer la fecha de corte
+            int rowsUpdated = preparedStatement.executeUpdate();
+            System.out.println(rowsUpdated + " usuarios deshabilitados por inactividad.");
+        } catch (Exception e) {
+            throw new SQLException("Error al deshabilitar usuarios inactivos: " + e.getMessage());
+        } finally {
+            closeDBConnection();
+        }
+        return getUsuarios();
+    }
+
+
+    public ArrayList<String[]> deshabilitarYHabilitarUsuarios(LocalDate fecha, boolean ignorePremio) throws SQLException {
+        if (!initDBConnection()) {
+            throw new SQLException("Error al conectar con la base de datos");
+        }
+
+        String deshabilitarQuery = "UPDATE Usuario u " +
+                             "SET activo = FALSE " +
+                             "WHERE u.id_usuario NOT IN (" +
+                             "    SELECT DISTINCT c.id_usuario " +
+                             "    FROM Comentarios c " +
+                             "    WHERE c.fecha_comentario >= ? " +
+                             ") AND u.premios <> 'Buen usuario';";
+
+        String habilitarQuery = "UPDATE Usuario u " +
+                "SET activo = TRUE " +
+                "WHERE u.id_usuario IN (" +
+                "    SELECT DISTINCT c.id_usuario " +
+                "    FROM Comentarios c " +
+                "    WHERE c.fecha_comentario >= ? " +
+                ") AND u.premios <> 'Buen usuario';";
+
+        if(ignorePremio){
+            deshabilitarQuery = "UPDATE Usuario u " +
+                          "SET activo = FALSE " +
+                          "WHERE u.id_usuario NOT IN (" +
+                          "    SELECT DISTINCT c.id_usuario " +
+                          "    FROM Comentarios c " +
+                          "    WHERE c.fecha_comentario >= ? );";
+
+            habilitarQuery = "UPDATE Usuario u " +
+                    "SET activo = TRUE " +
+                    "WHERE u.id_usuario IN (" +
+                    "    SELECT DISTINCT c.id_usuario " +
+                    "    FROM Comentarios c " +
+                    "    WHERE c.fecha_comentario >= ? );";
+        }
+
+        try{
+            PreparedStatement habilitarStmt = connection.prepareStatement(habilitarQuery)
+            PreparedStatement deshabilitarStmt = connection.prepareStatement(deshabilitarQuery);
+            // Asignar la fecha para ambas consultas
+            deshabilitarStmt.setDate(1, Date.valueOf(fecha));
+            habilitarStmt.setDate(1, Date.valueOf(fecha));
+
+            // Ejecutar la consulta para deshabilitar
+            int deshabilitados = deshabilitarStmt.executeUpdate();
+            System.out.println(deshabilitados + " usuarios deshabilitados por inactividad.");
+
+            // Ejecutar la consulta para habilitar
+            int habilitados = habilitarStmt.executeUpdate();
+            System.out.println(habilitados + " usuarios habilitados por actividad.");
+
+        } catch (SQLException e) {
+            throw new SQLException("Error al deshabilitar/habilitar usuarios: " + e.getMessage());
+        } finally {
+            closeDBConnection();
+        }
+
+        return getUsuarios();  // Devuelve la lista de usuarios tras las actualizaciones
+    }
+
+
 
 
 

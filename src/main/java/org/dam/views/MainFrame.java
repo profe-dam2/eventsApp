@@ -1,10 +1,13 @@
 package org.dam.views;
 
+import com.github.lgooddatepicker.components.DatePicker;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.dam.controllers.MainFrameController.*;
@@ -20,6 +23,12 @@ public class MainFrame extends JFrame implements InterfaceView {
     private JButton bt_artistsevents;
     private JButton EJECUTARButton;
     private JButton bt_update2;
+    private JButton bt_update3_1;
+    private JButton bt_update3_2;
+    private JButton bt_update4;
+    private JCheckBox ck_premio;
+    private DatePicker dp_fecha1;
+    private JButton bt_update4e;
 
     public MainFrame() {
         initWindow();
@@ -97,6 +106,11 @@ public class MainFrame extends JFrame implements InterfaceView {
         bt_artistsevents.setActionCommand(GET_ARTITS_EVENTS);
         bt_buscar1.setActionCommand(GET_USER_EVENTS);
         bt_update2.setActionCommand(UPDATE2);
+        bt_update3_1.setActionCommand(UPDATE3_1);
+        bt_update3_2.setActionCommand(UPDATE3_2);
+        bt_update3_2.setActionCommand(UPDATE3_2);
+        bt_update4.setActionCommand(UPDATE4);
+        bt_update4e.setActionCommand(UPDATE4_E);
     }
 
     @Override
@@ -106,6 +120,18 @@ public class MainFrame extends JFrame implements InterfaceView {
         bt_artistsevents.addActionListener(listener);
         bt_buscar1.addActionListener(listener);
         bt_update2.addActionListener(listener);
+        bt_update3_1.addActionListener(listener);
+        bt_update3_2.addActionListener(listener);
+        bt_update4.addActionListener(listener);
+        bt_update4e.addActionListener(listener);
+    }
+
+    public LocalDate getDate1(){
+        return dp_fecha1.getDate();
+    }
+
+    public boolean getIgnorePremio(){
+        return ck_premio.isSelected();
     }
 
     @Override
