@@ -1,5 +1,6 @@
 package org.dam.dao;
 
+import org.dam.database.Conexion;
 import org.dam.database.SQLDatabaseManager;
 
 import java.sql.Connection;
@@ -8,28 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ArtistaDAO {
-    private Connection connection;
-
-    private boolean initDBConnection(){
-        try {
-            connection = SQLDatabaseManager.connect();
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Error al conectar con la base de datos");
-        }
-        return false;
-    }
-
-    private boolean closeDBConnection(){
-        try {
-            SQLDatabaseManager.disconnect(connection);
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Error al desconectar con la base de datos");
-        }
-        return false;
-    }
+public class ArtistaDAO extends Conexion {
 
     public ArrayList<String[]> getArtistEvents(int id_artista) throws SQLException {
         ArrayList<String[]> eventList = new ArrayList<>();

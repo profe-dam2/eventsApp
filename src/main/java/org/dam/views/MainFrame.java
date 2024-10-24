@@ -29,6 +29,8 @@ public class MainFrame extends JFrame implements InterfaceView {
     private JCheckBox ck_premio;
     private DatePicker dp_fecha1;
     private JButton bt_update4e;
+    private JTextField tx_delete1;
+    private JButton bt_delete1;
 
     public MainFrame() {
         initWindow();
@@ -111,6 +113,7 @@ public class MainFrame extends JFrame implements InterfaceView {
         bt_update3_2.setActionCommand(UPDATE3_2);
         bt_update4.setActionCommand(UPDATE4);
         bt_update4e.setActionCommand(UPDATE4_E);
+        bt_delete1.setActionCommand(DELETE1);
     }
 
     @Override
@@ -124,6 +127,7 @@ public class MainFrame extends JFrame implements InterfaceView {
         bt_update3_2.addActionListener(listener);
         bt_update4.addActionListener(listener);
         bt_update4e.addActionListener(listener);
+        bt_delete1.addActionListener(listener);
     }
 
     public LocalDate getDate1(){
@@ -132,6 +136,10 @@ public class MainFrame extends JFrame implements InterfaceView {
 
     public boolean getIgnorePremio(){
         return ck_premio.isSelected();
+    }
+
+    public String getIdDelet1(){
+        return tx_delete1.getText();
     }
 
     @Override

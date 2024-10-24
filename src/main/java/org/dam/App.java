@@ -35,10 +35,12 @@ public class App
         EventosDAO eventosDAO = new EventosDAO();
         RegistroDAO registroDAO = new RegistroDAO();
         ArtistaDAO artistaDAO = new ArtistaDAO();
+        UbicacionDAO ubicacionDAO = new UbicacionDAO();
+        ComentarioDAO comentarioDAO = new ComentarioDAO();
 
         //Controladores
         MainFrameController mainFrameController = new MainFrameController(frame, generoDAO,
-                usuariosDAO, artistaDAO, eventosDAO);
+                usuariosDAO, artistaDAO, eventosDAO, ubicacionDAO, comentarioDAO);
 
         //Listeners
         frame.addListener(mainFrameController);

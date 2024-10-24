@@ -1,9 +1,6 @@
 package org.dam.controllers;
 
-import org.dam.dao.ArtistaDAO;
-import org.dam.dao.EventosDAO;
-import org.dam.dao.GeneroDAO;
-import org.dam.dao.UsuariosDAO;
+import org.dam.dao.*;
 import org.dam.views.MainFrame;
 
 import javax.swing.*;
@@ -26,21 +23,30 @@ public class MainFrameController implements ActionListener,
 
     public static final String UPDATE4_E = "UPDATE4_E";
 
+    public static final String DELETE1 = "DELETE1";
+
     private final MainFrame mainFrame;
     private final GeneroDAO generoDAO;
     private final UsuariosDAO usuariosDAO;
     private final ArtistaDAO artistaDAO;
     private final EventosDAO eventosDAO;
 
-    public MainFrameController(MainFrame mainFrame, GeneroDAO generoDAO,
-                               UsuariosDAO usuariosDAO,
-                               ArtistaDAO artistaDAO, EventosDAO eventosDAO) {
+    private final UbicacionDAO ubicacionDAO;
+
+    private final ComentarioDAO comentarioDAO;
+
+    public MainFrameController(MainFrame mainFrame, GeneroDAO generoDAO, UsuariosDAO usuariosDAO,
+                               ArtistaDAO artistaDAO, EventosDAO eventosDAO, UbicacionDAO ubicacionDAO,
+                               ComentarioDAO comentarioDAO) {
         this.mainFrame = mainFrame;
         this.generoDAO = generoDAO;
         this.usuariosDAO = usuariosDAO;
         this.artistaDAO = artistaDAO;
         this.eventosDAO = eventosDAO;
+        this.ubicacionDAO = ubicacionDAO;
+        this.comentarioDAO = comentarioDAO;
     }
+
 
     private void handleUpdate2(){
         try {
@@ -150,6 +156,19 @@ public class MainFrameController implements ActionListener,
 
     }
 
+    private void handleDelete1(){
+        try {
+            boolean okDelete =  comentarioDAO.eliminarComentario(Integer.parseInt(mainFrame.getIdDelet1()));
+            if (okDelete){
+                JOptionPane.showMessageDialog(null, "Mensaje eliminado con éxito");
+            }else{
+                JOptionPane.showMessageDialog(null, "El mensaje indicado no existe");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void windowClosing(WindowEvent e) {
 
@@ -211,6 +230,9 @@ public class MainFrameController implements ActionListener,
                 break;
             case UPDATE4_E:
                 handleUpdate4_E();
+                break;
+            case DELETE1:
+                handleDelete1();
                 break;
             default:
                 break;

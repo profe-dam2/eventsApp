@@ -1,34 +1,13 @@
 package org.dam.dao;
 
+import org.dam.database.Conexion;
 import org.dam.database.SQLDatabaseManager;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class UsuariosDAO {
-
-    private Connection connection;
-
-    private boolean initDBConnection(){
-        try {
-            connection = SQLDatabaseManager.connect();
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Error al conectar con la base de datos");
-        }
-        return false;
-    }
-
-    private boolean closeDBConnection(){
-        try {
-            SQLDatabaseManager.disconnect(connection);
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Error al desconectar con la base de datos");
-        }
-        return false;
-    }
+public class UsuariosDAO extends Conexion {
 
     private String censurarComentario(String comentario){
         String[] listaInsultos = new String[]{"mierda","mierd","mier","puta","put",

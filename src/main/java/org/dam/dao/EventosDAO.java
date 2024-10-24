@@ -1,5 +1,6 @@
 package org.dam.dao;
 
+import org.dam.database.Conexion;
 import org.dam.database.SQLDatabaseManager;
 import org.dam.models.EventModel;
 import org.postgresql.util.PSQLException;
@@ -7,28 +8,7 @@ import org.postgresql.util.PSQLException;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class EventosDAO {
-    private Connection connection;
-
-    private boolean initDBConnection(){
-        try {
-            connection = SQLDatabaseManager.connect();
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Error al conectar con la base de datos");
-        }
-        return false;
-    }
-
-    private boolean closeDBConnection(){
-        try {
-            SQLDatabaseManager.disconnect(connection);
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Error al desconectar con la base de datos");
-        }
-        return false;
-    }
+public class EventosDAO extends Conexion {
 
     public boolean createEvent(EventModel event) throws SQLException {
         if(!initDBConnection()){
