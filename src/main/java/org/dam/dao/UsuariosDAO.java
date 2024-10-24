@@ -382,7 +382,7 @@ public class UsuariosDAO {
         }
 
         try{
-            PreparedStatement habilitarStmt = connection.prepareStatement(habilitarQuery)
+            PreparedStatement habilitarStmt = connection.prepareStatement(habilitarQuery);
             PreparedStatement deshabilitarStmt = connection.prepareStatement(deshabilitarQuery);
             // Asignar la fecha para ambas consultas
             deshabilitarStmt.setDate(1, Date.valueOf(fecha));
