@@ -19,7 +19,7 @@ public class SQLDatabaseManager {
     private static final int SSH_PORT = 12000;
     private static final String SSH_USER = "sshuser-server";
     private static final String SSH_PASSWD = "1234";
-    private static final String SSH_PRIVATE_KEY = "C:\\Users\\rafa\\Documents\\CURSO 24-25\\AD\\ssh\\id_rsa";
+    private static final String SSH_PRIVATE_KEY = "/home/damx/Documents/ssh_postgres1/id_rsa_databse";
 
     private static final String DB_HOST = "127.0.0.1";
     private static final int DB_PORT = 5432;
