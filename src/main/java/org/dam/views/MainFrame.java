@@ -31,6 +31,10 @@ public class MainFrame extends JFrame implements InterfaceView {
     private JButton bt_update4e;
     private JTextField tx_delete1;
     private JButton bt_delete1;
+    private JTextField tx_delete2;
+    private JButton bt_delete2;
+    private JTextField tx_delete3;
+    private JButton bt_delete3;
 
     public MainFrame() {
         initWindow();
@@ -114,6 +118,8 @@ public class MainFrame extends JFrame implements InterfaceView {
         bt_update4.setActionCommand(UPDATE4);
         bt_update4e.setActionCommand(UPDATE4_E);
         bt_delete1.setActionCommand(DELETE1);
+        bt_delete2.setActionCommand(DELETE2);
+        bt_delete3.setActionCommand(DELETE3);
     }
 
     @Override
@@ -128,6 +134,16 @@ public class MainFrame extends JFrame implements InterfaceView {
         bt_update4.addActionListener(listener);
         bt_update4e.addActionListener(listener);
         bt_delete1.addActionListener(listener);
+        bt_delete2.addActionListener(listener);
+        bt_delete3.addActionListener(listener);
+    }
+
+    public int getDelete3Id(){
+        return Integer.parseInt(tx_delete3.getText());
+    }
+
+    public int getDelete2Id(){
+        return Integer.parseInt(tx_delete2.getText());
     }
 
     public LocalDate getDate1(){

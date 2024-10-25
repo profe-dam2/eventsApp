@@ -107,11 +107,13 @@ public class UsuariosDAO extends Conexion {
                 actualizarPreparedStatement.setInt(2, id_comentario);
                 actualizarPreparedStatement.executeUpdate();
             }
+
             // Obtener los comentarios con el nombre la fecha y el contenido del comentario
             String obtenerComentariosQuery = "SELECT c.comentario, c.fecha_comentario, u.nombre\n" +
-                    "FROM comentarios c\n" +
-                    "INNER JOIN usuario u\n" +
-                    "ON c.id_usuario = u.id_usuario;";
+                                             "FROM comentarios c\n" +
+                                             "INNER JOIN usuario u\n" +
+                                             "ON c.id_usuario = u.id_usuario;";
+
             PreparedStatement obtenerPreparedStatement = connection.prepareStatement(obtenerComentariosQuery);
             ResultSet obtenerResultSet = obtenerPreparedStatement.executeQuery();
             while(obtenerResultSet.next()){

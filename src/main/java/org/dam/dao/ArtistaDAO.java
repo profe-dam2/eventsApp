@@ -50,4 +50,59 @@ public class ArtistaDAO extends Conexion {
         return eventList;
     }
 
+    public boolean eliminarArtista(int idArtista) throws SQLException {
+        if (!initDBConnection()) {
+            throw new SQLException("Error al conectar con la base de datos");
+        }
+
+        try {
+            // Verificar si el artista existe
+            String queryCheck = "SELECT COUNT(*) > 0 AS existe FROM artista WHERE id_artista = ? AND disponible = true;";
+            PreparedStatement preparedStatementCheck = connection.prepareStatement(queryCheck);
+            preparedStatementCheck.setInt(1, idArtista);
+            ResultSet resultSet = preparedStatementCheck.executeQuery();
+
+            if (resultSet.next() && resultSet.getBoolean("existe")) {
+                // Verificar si ha asistido a algún evento
+                String queryVerificarAsistencia = "SELECT COUNT(*) > 0 AS asistio FROM eventoartista WHERE id_artista = ?;";
+                PreparedStatement preparedStatementAsistencia = connection.prepareStatement(queryVerificarAsistencia);
+                preparedStatementAsistencia.setInt(1, idArtista);
+                ResultSet resultSetAsistencia = preparedStatementAsistencia.executeQuery();
+                resultSetAsistencia.next();
+
+                // Si no ha asistido a ningún evento, eliminar
+                if (!resultSetAsistencia.getBoolean("asistio")) {
+                    String queryDelete = "DELETE FROM artista WHERE id_artista = ?";
+                    PreparedStatement preparedStatementDelete = connection.prepareStatement(queryDelete);
+                    preparedStatementDelete.setInt(1, idArtista);
+                    int rowsAffected = preparedStatementDelete.executeUpdate();
+                    if (rowsAffected > 0) {
+                        System.out.println("Artista eliminado exitosamente.");
+                        return true;
+                    }
+                } else {
+                    // Deshabilitar el artista
+                    String queryUpdate = "UPDATE artista SET disponible = false WHERE id_artista = ?;";
+                    PreparedStatement preparedStatementUpdate = connection.prepareStatement(queryUpdate);
+                    preparedStatementUpdate.setInt(1, idArtista);
+                    int rowsAffected = preparedStatementUpdate.executeUpdate();
+                    if (rowsAffected > 0) {
+                        System.out.println("Artista deshabilitado exitosamente.");
+                        return true;
+                    }
+                }
+            } else {
+                // La ID del artista no existe
+                return false;
+            }
+        } catch (Exception e) {
+            throw new SQLException("Error al eliminar artista", e);
+        } finally {
+            closeDBConnection();
+        }
+
+        throw new SQLException("Error al eliminar artista");
+    }
+
+
 }

@@ -20,10 +20,10 @@ public class MainFrameController implements ActionListener,
     public static final String UPDATE3_1 = "UPDATE3_1";
     public static final String UPDATE3_2 = "UPDATE3_2";
     public static final String UPDATE4 = "UPDATE4";
-
     public static final String UPDATE4_E = "UPDATE4_E";
-
     public static final String DELETE1 = "DELETE1";
+    public static final String DELETE2 = "DELETE2";
+    public static final String DELETE3 = "DELETE3";
 
     private final MainFrame mainFrame;
     private final GeneroDAO generoDAO;
@@ -169,6 +169,32 @@ public class MainFrameController implements ActionListener,
         }
     }
 
+    private void handleDelete2(){
+        try {
+            boolean okDelete =  ubicacionDAO.eliminarUbicacion(mainFrame.getDelete2Id());
+            if (okDelete){
+                JOptionPane.showMessageDialog(null, "Ubicacion eliminada con éxito");
+            }else{
+                JOptionPane.showMessageDialog(null, "La id no existe");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    private void handleDelete3(){
+        try {
+            boolean okDelete =  artistaDAO.eliminarArtista(mainFrame.getDelete3Id());
+            if (okDelete){
+                JOptionPane.showMessageDialog(null, "Artista eliminado con éxito");
+            }else{
+                JOptionPane.showMessageDialog(null, "La id "+ mainFrame.getDelete3Id() +" no existe");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
     @Override
     public void windowClosing(WindowEvent e) {
 
@@ -233,6 +259,12 @@ public class MainFrameController implements ActionListener,
                 break;
             case DELETE1:
                 handleDelete1();
+                break;
+            case DELETE2:
+                handleDelete2();
+                break;
+            case DELETE3:
+                handleDelete3();
                 break;
             default:
                 break;

@@ -21,12 +21,12 @@
     <rowspec value="top:22dlu:noGrow"/>
     <rowspec value="center:39px:noGrow"/>
     <rowspec value="top:21dlu:noGrow"/>
-    <rowspec value="center:53px:noGrow"/>
-    <rowspec value="top:17dlu:noGrow"/>
+    <rowspec value="center:37px:noGrow"/>
+    <rowspec value="top:35dlu:noGrow"/>
     <rowspec value="center:31px:noGrow"/>
     <rowspec value="center:36px:noGrow"/>
-    <rowspec value="top:18dlu:noGrow"/>
-    <rowspec value="top:15dlu:noGrow"/>
+    <rowspec value="top:9dlu:noGrow"/>
+    <rowspec value="top:8dlu:noGrow"/>
     <rowspec value="center:41px:noGrow"/>
     <colspec value="fill:18px:noGrow"/>
     <colspec value="fill:124px:noGrow"/>
@@ -208,31 +208,6 @@
           <text value="UPDATE 4"/>
         </properties>
       </component>
-      <component id="dc59a" class="com.github.lgooddatepicker.components.DatePicker" binding="dp_fecha1">
-        <constraints>
-          <grid row="20" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <forms top="10" left="10" bottom="10" right="10" defaultalign-horz="false"/>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="75d41" class="javax.swing.JCheckBox" binding="ck_premio">
-        <constraints>
-          <grid row="21" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <forms top="0" left="10" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <text value="IGNORAR PREMIOS"/>
-        </properties>
-      </component>
-      <component id="95ab2" class="javax.swing.JButton" binding="bt_update4e">
-        <constraints>
-          <grid row="22" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="UPDATE 4_E"/>
-        </properties>
-      </component>
       <component id="40ca9" class="javax.swing.JLabel">
         <constraints>
           <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
@@ -240,24 +215,6 @@
         </constraints>
         <properties>
           <text value="ELIMINAR"/>
-        </properties>
-      </component>
-      <component id="e0999" class="javax.swing.JButton" default-binding="true">
-        <constraints>
-          <grid row="18" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <forms top="0" left="10" bottom="0" right="10" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <text value="DELETE 4"/>
-        </properties>
-      </component>
-      <component id="53f40" class="javax.swing.JButton" default-binding="true">
-        <constraints>
-          <grid row="17" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <forms top="0" left="10" bottom="0" right="10" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <text value="DELETE 2"/>
         </properties>
       </component>
       <component id="409ee" class="javax.swing.JTextField" binding="tx_delete1">
@@ -285,6 +242,89 @@
         </constraints>
         <properties>
           <text value="id comentario"/>
+        </properties>
+      </component>
+      <component id="53f40" class="javax.swing.JButton" binding="bt_delete2">
+        <constraints>
+          <grid row="18" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="10" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="DELETE 2"/>
+        </properties>
+      </component>
+      <component id="6c8f8" class="javax.swing.JTextField" binding="tx_delete2">
+        <constraints>
+          <grid row="17" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="6b3eb" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="17" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="id ubicacion"/>
+        </properties>
+      </component>
+      <component id="95ab2" class="javax.swing.JButton" binding="bt_update4e">
+        <constraints>
+          <grid row="23" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value="UPDATE 4_E"/>
+        </properties>
+      </component>
+      <component id="75d41" class="javax.swing.JCheckBox" binding="ck_premio">
+        <constraints>
+          <grid row="22" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="IGNORAR PREMIOS"/>
+        </properties>
+      </component>
+      <component id="dc59a" class="com.github.lgooddatepicker.components.DatePicker" binding="dp_fecha1">
+        <constraints>
+          <grid row="21" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="10" left="10" bottom="10" right="10" defaultalign-horz="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="e0999" class="javax.swing.JButton" binding="bt_delete3">
+        <constraints>
+          <grid row="20" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="10" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="DELETE 3"/>
+        </properties>
+      </component>
+      <component id="46e59" class="javax.swing.JTextField" binding="tx_delete3">
+        <constraints>
+          <grid row="19" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="7f79b" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="19" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="id artista"/>
         </properties>
       </component>
     </children>
